@@ -1,11 +1,11 @@
 ---
 layout: post
 title:      "The De Facto Guide to Using the Yelp API"
-date:       2020-08-13 20:49:31 +0000
+date:       2020-08-13 16:49:31 -0400
 permalink:  the_de_facto_guide_to_using_the_yelp_api
 ---
 
-As I promised in my final project blog post, I will go into greater detail on how to properly use the yelp fusion api for your final react/redux project here. Let me start from the beginning of how I approached it, work my way to all the pain points that I encountered, and show you my final solution.  
+As I promised in my final project blog post, I will go into greater detail on how to properly consume the yelp fusion api for your final react/redux project here. Let me start from the beginning of how I approached it, work my way to all the pain points that I encountered, and show you my final solution.  
 
 Getting access to the yelp api is really straightforward and easy as obtaining the client id and api key, then saving it in a `.env` file. After that, keep in mind that for each api call you make, your key needs to be passed as the header value like so:
 
