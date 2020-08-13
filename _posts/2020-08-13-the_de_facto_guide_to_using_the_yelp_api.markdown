@@ -44,7 +44,7 @@ export const fetchRestaurants = (searchValues) => {
 
 As you can see, I'm using `axios` to make my api call. You can use the `fetch()` instead if you want, but I personally like to use axios because it's better at error-handling and it makes data transformation easier. 
 
-At this point, if you also set up your reducer correctly to handle the corresponding actions that you dispatched (or sent) from your component, then you should run into a CORS error (specifically a 500 error or something like that)! I know, bummer, right? It's ok though because it turns out the yelp api doesn't support CORS. The workaround to this, though, is with [cors-anywhere](https://github.com/Rob--W/cors-anywhere). It's basically a proxy that is used to bypass the CORS restrictions. To use it, prepend the url to the yelp api endpoint like this: 
+At this point, if you also set up your reducer correctly to handle the corresponding actions that you dispatched (or sent) from your component, then you should run into a CORS error (specifically a 500 error or something like that)! I know, bummer, right?! It's ok though because it turns out the yelp api doesn't support CORS. The workaround to this, though, is with [cors-anywhere](https://github.com/Rob--W/cors-anywhere). It's basically a proxy that is used to bypass the CORS restrictions. To use it, prepend the url to the yelp api endpoint like this: 
 
 ```
 // src/actions/yelpActions.js
