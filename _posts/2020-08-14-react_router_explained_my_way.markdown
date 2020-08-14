@@ -1,7 +1,7 @@
 ---
 layout: post
 title:      "React Router Explained My Way"
-date:       2020-08-14 23:50:48 +0000
+date:       2020-08-14 19:50:49 -0400
 permalink:  react_router_explained_my_way
 ---
 
@@ -12,7 +12,7 @@ Here are the first few routes that serve as a gateway to my app:
 ```
 // App.js
 
-<div className='app'>
+     <div className='app'>
         <Switch>
           <Route path='/login'>
             <Login loginUser={this.props.loginUser} />
@@ -29,7 +29,7 @@ Here are the first few routes that serve as a gateway to my app:
           </Route>
           <Redirect to='/login' />
         </Switch>
-      </div>
+     </div>
 ```
 
 So by default, I am at `/login` because, once again, according to the official react router doc, `<Switch>` "renders the first child `<Route>` or `<Redirect>` that matches the location." I think the switch component was, by far, the trickiest component to understand in terms of how it works, so please pay close attention to the use of it above. Without it, my pages would not be rendering in the exact way and order that I want. The best way to specifically demonstrate this is if I were to remove the switch component. This would mean that if I either decided to login from `/login` or `signup` in order to go to `/`, "weird" things would happen. When I go to `/signup`, the signup component would render fine—since it's the next route—but if I logged in from there or `/login` to visit `/`, I would get a blank page and a piece of the ui gets rendered below the login or signup component when I refresh the page on either url. Another peculiar thread that runs through these pages when I visit them is that if I hit refresh on either one of them, I would automatically get returned to `/login` and that's NOT what I want—I want to be able to still be on the same page if I refresh it. The underlying reason for all of this very curious, quirky behavior is because `<Switch>` is unique in that it renders a route **exclusively**—which means only one `<Route>` can match and render. In contrast, every `<Route>` that matches the location renders **inclusively**—which means more than one `<Route>` can match and render at the same time. This can't be overstated enough, but remembering this is key to understanding how the switch component works. 
@@ -43,7 +43,7 @@ Now here are the rest of the routes when I'm logged in:
 ```
 // Home.js
 
-<>
+     <>
         <Header
           username={this.props.username}
           handleLogout={this.handleLogout}
@@ -70,7 +70,7 @@ Now here are the rest of the routes when I'm logged in:
         <Route path='/saved-restaurants'>
           <SavedRestaurantListContainer />
         </Route>
-      </>
+     </>
 ```
 
 Right off the bat, I'm at  `/` and I can see `<Header>`—which comprises a big heading of my app name "Foodcrwlr", a search bar for looking up restaurants by term and location, user dropdown menu, and a logout button. This is the only component that provides a consistent ui and where the core features stay the same across my entire app. Below it is what we will more importantly draw our attention and focus to though: the routes. Since its path exactly matches `/`, the first route is the only one that literally gets to render out its list of new and trendy restaurants in NYC. At this point, you should have put `<Header>` and `<HotAndNewRestaurantListContainer />` together as making up the home page by default. Every other route is navigated to from here on out. Often functionally confused with `<Switch>`, the `exact` prop only renders a route (and it doesn't have to be the first one) if the path *exactly* matches the current url—and the first route happens to do exactly just that. To clearly highlight the difference between the two in this scenario, let's remove the exact prop and wrap the routes in the switch component. If I try navigating to other routes, something weird that I don't want to happen happens: the url changes to match any of the paths but the home ui stays the same. Why is that happening you may ask? It's because `<Switch>` is literally rendering out its first matching route each time—`<Route path='/'><HotAndNewRestaurantListContainer /></Route>`—ignoring all the other routes.
